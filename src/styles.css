@@ -54,6 +54,51 @@
   object-fit: contain;
   flex-shrink: 0;
 }
+/* ---- Live / Test environment switch ---- */
+.env-toggle .btn {
+  white-space: nowrap;
+}
+.env-toggle .btn-outline-light {
+  color: #cbd5e1;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.env-toggle .btn-outline-light:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+/* on the light login card the inactive option needs a dark outline instead */
+.env-login .env-toggle .btn-outline-light {
+  color: #475569;
+  border-color: #cbd5e1;
+}
+.env-login .env-toggle .btn-outline-light:hover {
+  color: #0f172a;
+  background: #e2e8f0;
+}
+.env-login-live {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+}
+.env-login-test {
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+}
+.env-banner {
+  background: #f97316;
+  color: #fff;
+  flex-shrink: 0;
+  z-index: 1031;
+}
+.env-banner-link,
+.env-banner-link:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+/* the banner is outside the shell row; keep the row filling the rest of the viewport */
+.shell-body {
+  min-height: 0;
+}
+
 .auth-page {
   min-height: 100vh;
   display: grid;
