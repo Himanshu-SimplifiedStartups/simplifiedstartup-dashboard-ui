@@ -5,7 +5,9 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Spinner from "react-bootstrap/Spinner";
 import { api, ApiError } from "../api/client";
+import { API_HOST, HAS_TEST_ENV, IS_TEST } from "../api/env";
 import { useAuth } from "../auth/AuthContext";
+import { EnvToggle } from "../ui/EnvToggle";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -39,6 +41,17 @@ export default function Login() {
             <img className="brand-mark" src="/logo.png" alt="" aria-hidden="true" />
             <span className="fw-bold">Simplified Startup — Dashboard</span>
           </div>
+          {HAS_TEST_ENV && (
+            <div className={`env-login rounded p-2 mb-3 ${IS_TEST ? "env-login-test" : "env-login-live"}`}>
+              <div className="d-flex align-items-center justify-content-between gap-2">
+                <span className="small fw-semibold">{IS_TEST ? "Test mode" : "Live mode"}</span>
+                <EnvToggle compact />
+              </div>
+              <div className="small text-muted mt-1">
+                {IS_TEST ? `Signing in to the test server (${API_HOST}). Separate login from Live.` : "Signing in to the live server behind simplifiedstartup.com."}
+              </div>
+            </div>
+          )}
           <Form onSubmit={onSubmit}>
             <Form.Group className="mb-3" controlId="loginEmail">
               <Form.Label>Email</Form.Label>

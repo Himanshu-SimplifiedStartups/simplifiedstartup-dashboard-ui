@@ -14,6 +14,20 @@ npm run dev        # http://localhost:5173 — expects the server on :4000
 Sign in with the admin the server seeded (`SEED_ADMIN_*` in the server's `.env`).
 `VITE_API_URL` (see `.env.example`) points elsewhere when the API isn't local.
 
+## Live / Test mode
+
+The deployed dashboard talks to two servers and switches between them at runtime,
+like a payment gateway's test toggle:
+
+- **Live** (default) → `VITE_API_URL`, the production API behind simplifiedstartup.com.
+- **Test** → `VITE_API_URL_TEST`, the dev API with test data.
+
+The toggle sits in the sidebar and on the login card; Test mode shows an orange
+banner across the top and relabels "Publish to website". The choice is stored per
+browser (`localStorage` key `ss-dashboard-mode`) and switching reloads the page.
+Each server keeps its own session cookie, so you sign in to each environment once.
+When `VITE_API_URL_TEST` is unset (local dev) the toggle is hidden.
+
 ## House UI conventions
 
 - **Skeletons** (Bootstrap `Placeholder`) while tables/stats load

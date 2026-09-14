@@ -1,4 +1,7 @@
-export const API_URL = import.meta.env.VITE_API_URL ?? "http://localhost:4000";
+import { API_URL } from "./env";
+
+// Resolved per Live/Test mode in ./env; re-exported so callers keep importing it from here.
+export { API_URL };
 
 export class ApiError extends Error {
   status: number;

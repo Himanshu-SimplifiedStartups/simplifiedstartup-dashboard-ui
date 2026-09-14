@@ -4,6 +4,7 @@ import Badge from "react-bootstrap/Badge";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { useAuth } from "../auth/AuthContext";
 import { useToast } from "../ui/Toasts";
+import { EnvToggle, TestModeBanner } from "../ui/EnvToggle";
 import type { Role } from "../api/types";
 
 const NAV_ITEMS: { to: string; label: string; icon: string; roles: Role[] }[] = [
@@ -41,6 +42,9 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
 
   return (
     <>
+      <div className="mb-3 px-1">
+        <EnvToggle compact />
+      </div>
       <nav className="nav nav-pills flex-column gap-1">
         {NAV_ITEMS.filter((item) => user && item.roles.includes(user.role)).map((item) => (
           <NavLink
@@ -74,7 +78,9 @@ export default function Shell() {
   return (
     // viewport-locked shell: only <main> scrolls, so the sidebar (and its
     // sign-out footer) stay on screen however long a table page gets
-    <div className="d-flex flex-column flex-lg-row vh-100 overflow-hidden bg-light">
+    <div className="d-flex flex-column vh-100 overflow-hidden bg-light">
+      <TestModeBanner />
+      <div className="d-flex flex-column flex-lg-row flex-grow-1 overflow-hidden shell-body">
       {/* mobile top bar */}
       <header className="shell-topbar d-lg-none d-flex align-items-center justify-content-between text-white px-3 py-2">
         <Brand />
@@ -106,6 +112,7 @@ export default function Shell() {
       <main className="shell-main flex-grow-1 p-3 p-lg-4 overflow-auto">
         <Outlet />
       </main>
+      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Button from "react-bootstrap/Button";
 import { api, ApiError } from "../api/client";
+import { IS_TEST } from "../api/env";
 import type { PublishStatusDto } from "../api/types";
 import ConfirmModal from "./ConfirmModal";
 import { useToast } from "./Toasts";
@@ -36,8 +37,9 @@ export default function PublishButton() {
   const status = data?.status;
   return (
     <div className="text-end">
-      <Button variant="success" onClick={() => setConfirm(true)}>
-        <i className="bi bi-rocket-takeoff me-1" aria-hidden="true"></i>Publish to website
+      <Button variant={IS_TEST ? "warning" : "success"} onClick={() => setConfirm(true)}>
+        <i className="bi bi-rocket-takeoff me-1" aria-hidden="true"></i>
+        {IS_TEST ? "Publish to test website" : "Publish to website"}
       </Button>
       {status?.lastPublishedAt && (
         <div className="text-muted small mt-1">
@@ -47,14 +49,21 @@ export default function PublishButton() {
       )}
       <ConfirmModal
         show={confirm}
-        title="Publish to the website?"
+        title={IS_TEST ? "Publish to the test website?" : "Publish to the website?"}
         confirmLabel="Publish"
         variant="primary"
         busy={publish.isPending}
         onCancel={() => setConfirm(false)}
         onConfirm={() => publish.mutate()}
       >
-        The live website rebuilds with the currently <b>published</b> content.
+        {IS_TEST ? (
+          <>
+            You are in <b>Test mode</b>: the <b>test</b> website rebuilds with the test server&apos;s published content.
+            simplifiedstartup.com is not affected.
+          </>
+        ) : (
+          <>The live website rebuilds with the currently <b>published</b> content.</>
+        )}
         {!status?.hookConfigured && (
           <div className="alert alert-warning py-2 mt-2 mb-0 small">
             No deploy hook is configured on the server yet (<code>WEBSITE_DEPLOY_HOOK_URL</code>) — this will only record the
