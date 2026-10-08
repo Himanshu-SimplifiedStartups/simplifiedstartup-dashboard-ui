@@ -60,7 +60,10 @@ function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
         ))}
       </nav>
       <div className="mt-auto pt-3 border-top border-secondary">
-        <div className="small text-truncate">{user?.name ?? user?.email}</div>
+        <NavLink to="/account" className="small text-truncate text-white-50 d-block text-decoration-none" onClick={onNavigate} title="Account and password">
+          <i className="bi bi-person-circle me-1" aria-hidden="true"></i>
+          {user?.name ?? user?.email}
+        </NavLink>
         <div className="d-flex align-items-center justify-content-between mt-1">
           <Badge bg="secondary">{user?.role}</Badge>
           <button className="btn btn-link btn-sm text-white-50 p-0" onClick={onLogout}>

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { RequireAuth, RequireRole } from "./auth/AuthContext";
 import Shell from "./layout/Shell";
 import AcceptInvite from "./pages/AcceptInvite";
+import Account from "./pages/Account";
 import Careers from "./pages/Careers";
 import Content from "./pages/Content";
 import ForgotPassword from "./pages/ForgotPassword";
@@ -68,6 +69,7 @@ export default function App() {
             </RequireRole>
           }
         />
+        <Route path="/account" element={<Account />} />
         <Route path="*" element={<Overview />} />
       </Route>
     </Routes>
