@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
@@ -67,12 +67,8 @@ export default function Login() {
               Sign in
             </Button>
           </Form>
-          <div className="text-center mt-3">
-            <Link to="/forgot-password" className="small">
-              Forgot password?
-            </Link>
-          </div>
-          <p className="text-muted small text-center mt-3 mb-0">Access is invite-only — ask an admin for an invitation.</p>
+          {/* Forgot-password link hidden for now (no outbound mail on prod); the route still exists. */}
+          <p className="text-muted small text-center mt-3 mb-0">Access is invite-only — ask an admin for an invitation. To change your password, sign in and open Account.</p>
         </Card.Body>
       </Card>
     </div>
