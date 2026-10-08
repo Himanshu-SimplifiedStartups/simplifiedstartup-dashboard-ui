@@ -99,6 +99,9 @@
   min-height: 0;
 }
 
+/* single-column pages such as Account */
+.page-narrow { max-width: 640px; }
+
 .auth-page {
   min-height: 100vh;
   display: grid;
